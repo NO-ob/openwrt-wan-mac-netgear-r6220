@@ -3,7 +3,7 @@
 START=17
 
 start() {
-  NEWMAC=$(dd if=/dev/urandom bs=1024 count=1 2>/dev/null | md5sum | sed -e 's/^\(..\)\(..\)\(..\)\(..\)\(..\)\(..\).*$/\1:\2:>
+  NEWMAC=$(dd if=/dev/urandom bs=1024 count=1 2>/dev/null | md5sum | sed -e 's/^\(..\)\(..\)\(..\)\(..\)\(..\)\(..\).*$/\1:\2:\3:\4:\5:\6/' -e 's/^\(.\)[13579bdf]/\10/')
   uci set network.wan.macaddr=${NEWMAC}
   uci set network.wan_eth0_2_dev.macaddr=${NEWMAC}
   uci set network.lan_eth0_1_dev.macaddr=${NEWMAC}
